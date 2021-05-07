@@ -57,7 +57,7 @@ function App() {
     }
 
     console.log('>>>',token);
-  },[])
+  },[token, dispatch])
 
  
 
