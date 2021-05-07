@@ -1,20 +1,39 @@
 import React from 'react'
 import "./Body.css"
+import { useDataLayerValue } from './DataLayer'
 import Header from './Header'
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+
+
 
 function Body({spotify}) {
+
+
+    const [{discover_weekly}, dispatch] = useDataLayerValue(); 
+
     return (
         <div className="body">
             <Header spotify={spotify}/>
 
             <div className="body__info">
-                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEhIVFRUVFRUVFRUXFxUVFRcVFRUWFhUVFhUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OFhAQFysdHx0rLS0tLS0tLSstKy0rLSstLSstKy0tLS0tLSstLS0tKysrKysrKysrKy0rLS0rLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAACAwABBAUGB//EADsQAAIBAgMFBwIEBAUFAAAAAAECAAMRBBIhBTFBUfAGE2FxgZGhIrEywdHhFCNy8QdSYoKSFRYzQkP/xAAaAQADAQEBAQAAAAAAAAAAAAAAAQIDBAYF/8QAJBEBAQEBAAICAgMAAwEAAAAAAAERAgMhEzEEEkFRYRQVIgX/2gAMAwEAAhEDEQA/APOmn1rFsk2tT68p3MFg0pKC1MuzC97AqL8LnjPo24ix5Ap5fEArPa4qlSqjK1NkLaK2Wwv4MNJ5TEYcqxU7wbSuetTYxFItlmpkiysrWdjMRBtNDJFssZFSQisoiAVJJaSASSSSASSSSASSSFTpFiFUFmJsAN59IhJb9BnZ2H2dq4k3/BT4uR8IOJ+J3tg9kAtqmI1O8U+A/qPEz1iKBYDQewt+U5/J5s9R9X8X/wCdev8A15PU/pl2Vsqlh1y01tf8THVm8z+Q0m4mUDJOW237fZnM5mc/S5cG8u9ojS8sSjJugFyry5UAq55feSH6yoDI8K9Lhz+f0noaNMV0U3W4FmuuYgjwuJyqiRall1UkHmNPtO2+3mHaTCikS7FQADcrdL88yXKnwnksa2d2fdmJNvCb8Q7t+Ni1uZ0mR6cqTBWAp1viik3PTijTlamxiZIspNhpxTp8x6mxlZYoia3SLZY9RYzGVHlYBWMi5JdpUCSSWoJNgCSdABvPgJ63YXZAtZ8RoOFPif6jJ67nP228Pg78tzmOFsfYtXEt9AsvFz+EfqfD7T6DsbYtLDL9AJYj6nYDMfbcPCb6VIIAqgKo3ACwHpDnH35b19Pv/jfhceL3fdQdXkkBkmLtqyJBKvulwLE6vLBkEqAxYMuCJcBi/SQSX5SrwIVutZJV5IB5t0inWb6lL494uoh/edjy+uc6D7+sS1OdF6draRNSjK0Oc9KJqU50DTiXSOU3PanFMk31KcUySirCyf2iGSb2SJZIamxjIi2WbMkS6R6jGVlmrZmyauIbLTXzY6KPM/lPQbE7JtVs9a6Uzw3Ow8BwE9vhcGlJQlNQijgPv4nxMy8nmk9R2fj/AIV799eo4+xOzlLD6/jqcXPD+gcJ2IwrBtOS9W/b7nj554mczAgSoUqJrKEyGXa8loKVIBJLaIJJKkEAuQ/3lCXAkvLEomWYBLSSWlwDAyRBSdBkES6+k65XkZWBqfXqYp00m9qfGKKR6uVz3p/eJZJ0GSKqUvtGbnMkU9Ob6lP3iTT9pWm5704mok6T0/LrxmrZ2xWq6n6Uvq1tT5D84XrBJrh4fAPUbJTXM3x5k8p7DYvZtKNmcB33/wClT4CdfA4JKShUUDnzPiZptMO/Jb9OzxePme6C3jBIjLSiJi7eeyysorDIlERNZ2WRKIjCsoCDSdlESrRsAiC50G0q8MyoLlBJ+UK33lGJSpN8u0mXrnAIBKkkEAK55ySadCSAxGSAyTTaAVnU8XKyssU1Oa3WAacFzpiNOLqJNjrFsseqlYGSJ7gmwAuTpYb51KWGLbt3Ph6Tp4bCqm4eZ4wtxUrnYDYwFjU1PAcB5zsKkYqwgJlbrfmyBtKtCtJaTjWdgMq0YRBIixpz2XaUYyVaLG07BaVaMtBiazsu0ojlGNKywazsu0HLGMJCsGk7Ky85RhkSrQaToFpUOxlGCtDJaXaUViXqrSQ7SRjTrSrSCSdDxAbQCvjGmVljOVnyRqYS+8eketMCGItVKpVhhbyWhiJc6Eol2lQryVzoNpAJcuDSdgMqHKIiaTtVoLCHaVFjTnsFoNowiUYWNZ2AiVaHKIk41nZdpREZaDBrOwWlWjLSoms7LIg2jSINoNJ2XaURGETndoMV3OHq1OIQhf6m0X7xyb6V15P15t/pj/7kw/8Amkny/KOZkmvwVxf9hH2jPDmdT4w1aaPOacIYic0IH1iGnEy1ilMMGIzryxFK0IGJWmAyxAvLvA5R5pYgAywYlzoUlpQMu8Sp0lpREsyAQxpOw2ktClERNZ2G0q0MiS0S52WRKjIMTWdhAg2hkSWhjWdlmURDtKtE1nYLTyH+I2KtTp0hvdsx8l3fJ+J7G0+adt8T3mKYcEAQeY3/ADNfDzvTL8ry547P7ebySozIfD5lzu2Ph5X1MPaNV+ExhoSvOfGbajQw0yZ+vOMUxBqzww0yh/0/eMDxA8NGAzMrQ1MWG0BoQMQDCDRYqHiFeJVoQMAZLvFg/vCzRKlHeXeBeWDEqdClwbyzBc6QySSRY0nSjKhGS0TSdBtKIhGQwaTsEq0MiVaTWs7IxFXIrMdyqT7CfIsS5dmc72Yt7z6T2uxGTDsBvchR5HfPnTJOnwT1rm/J630yWkmjuh1eSbubHtQ3HzjFqTEtSGr+IkY5m4PHFWG8Ecrgi8wK/wC/lPZbOYY3Ddyx/m07WPMblb20mXfX6r45nXpwFUkXANuYBt7y1eelx+HL5cFQsAihqrHcOQPM31nOxvZ8pTL06q1Qv4gNCAN+4nWTO5/J3xX+HOR/GMDx2O2aaSUnLA95bSx0uLzcNgN3opZx9VMvex0sQLfMd6hfpXOV4QaP2ls00Mt2DFibgcLTEGhLpWWfbSDDDTOjQlMC1pB/KEGmYNGK0RnZoQMSDCDQVpt5ICmFeKno7ywYF5YMSp0OSBeXBc6XJL64yRLnSoN4UoRY0nTx/bWrmdKY/wDUZj5nQfE8u1Odva1TPVd+ZI9BoPj7znOk6uPUZdXaw93Lmruz1eSWlvRvzhB5kR+v0jFqQc9jaKs9H2IrBcSMzW+ht5nkw8elNzqEc+SsfUECR3zLMo59XY9vsXHUxXxVJ3C96zBW4X1W3nrH4LDpgKNUvUVi4sqrxtfhz1+J4JqltCNRvBGvqDNLoy5SyMoOq3BAI5jmJlfF/v20+R7l6KYmhRIqqvd2z338ARoZvbEL/GIcy2/h31uN+dLT5sKkaKkn4f8AR8ufw6eNq3qOd93e3/I218osPMivGB5rmTGNu3WtXMYr85jR41Wioag0MPMoaMV/38osNpDQs0zK0NXiGtIMu8QrQ80KenXhgxAeGGk4ZoMggXlkwPTLywYuEDEuUUz7RrZKTsN4Bt5nQfJjgZy+0FT6VTmbnyH7kRye1a8q1Ln4D4tEuntOgyaRLpNxrD3ayTdl6tJDRrirU5RqN1eYQ8NH6Etm39511vn0Z9svhdnYWpTCEsFU5gSLEE6WI5T5gr8uurCfTU2auL2dhaYrJTKqrG5F9xFrX8Zh55Nmr8cxVeqm0cFVrGmqVqIY3X/SMxAO8qRwPGI2vs7FV/4Smz02zoSuVWWwCKSzEk5tLbrSto4rD4DB1MNSqipVqggkWNswszabhbQTfjsSM2AyVkpkIfqNmH/jQZCBzuZjtn19LyX7cHaOwu6QvTxFOqFYIwFwwa9soFzfU7p0MJ2QfKueslN2F1Q6nduNra332nR21UprR73EJRFVKimmaZBLgMDc+YvpA2rstMbVp4mniECZVBufqWxvdddDr7x/J0n4+Y5GC7PVnqvSOVO7tmc3K2Ootpc389JoxnZxkAdaqvTuAzLf6bm2Ygbxc66zZsitRIxGEFckv+Gqx1YkfUL8bSnpJgsHWpPUR2q3Cqu76gBu8tY/36L9OWDFbEqU6yUSQxe1mAsN9jpv0t8iak7PNnZTUQLTAzuQQATrYC86+xto06lCnXqEd5QV1NyL3AsT6ix9Zj7PbVFWnVTMgqs7OBU1UhraW8LWivfY/ThixexmTIy1Fem7qocX0JNhmA3/ALTRjuz70kZzUUhRcDW5/Sa8dXZFpU2eiC1ZCUprYCzhrg303b5zu19e+I0NwEFrG4G+8OeurS655k1zg8YjTGH6+8YG8jNmDXnhh5lVoQbTrlAa1hvGHmmYPCBiPWkNDBmcHxhK0VM+8K8SWhBoj04GcXajZnPhp7b/AM51S9tfWcdxc38z7mOHrEUinWbWSKZPtLV+zF3Mk25fEyQGvBI8NakyBo1Xmx41B/GP+oWuGHK4Iv5XmBXn0nbynGbJw1ZfqemyJ47+61PsZn33+uac514kXAuQQOdjb33RiEngfHRjbjrwHH2n1rFbMptgm2epGdcOpC8b6lT6ss83slHpbHso/m4uplQcfrOQAf7VJ95lPND+N4wVOesar8r+XRnol7Cv+AYmka4F+6vru3XmHY3ZmpWFR3ZaNOkxR3qbs4IuoHhpqZfycYi8dOfTJJAAJvuABJ8gBGkkGzAg8iCD7Gd/Cdn3w2Jw1TOtSm9QBaiE2vroeW6b9vdn6uJxdZwwp00C3qPfLoNQPIa3i+TnYPjuPLKGsWytlB1NiVHDU7hqR7y1frx5z1mBpL/0uogqDL37KKliBY1VAbLvA1nEx/Z2rSr06N1Y1fwsoOXxuDyhPJLbpdeO+mNX66841XPOVtjAnDVTSLq5AFyoNhfW2vWszB9Jcyz0zss9VsWpzjQZjV4xX1hhNq1IzN1aYVqc41X/AH/aLA1rUjA8xho1X9JNga1aEGmVG9oat1+cWDWsGErc5mVoYeGAyu306cZiKR9drxUIrSiIBWOYcZTDjGNZ8hkjrDq8kD18rVoYaZwYQadDVoR59R/wo2lTajVw9VlsrrUUMQBra9r79QJ8pDQs0z8nH7zD5uXX0vAdpwdtGoW/luTQvfTKB9JvutmA951u1m3qNDF4KmpXuqbNVfLZgua6Lu5Xc+k+Q5tOuOkMPM74Jaf719zrM5rGulTCCjlzCqVBqDTcTOb2f20uJoVqKPRNcVncCoP5dRWqZgwU+fjY2nyJaptbhy4e24+cNHOmv3+OXnJn4/8AovkfXMbjGpvhaNSph7mqC1OmoAQAk3vewG6dPaW0qGKavgWbIcgZamYZTxvfwNtON58Vz3/v+14QYctfKH/H/wBHyPowXutk1qTFc61WGUMD/wDRTprqLaztdntqI+DXEVlu2GDKGPGwsLHxFhPkYb4/X7z0WL7S58ImESnkVbFmzZi9uYsLa6w68X8FO2bFYtqjtUbUuSx9YK1JhV4xHm+Yxvu63U6nnGB5iV+XXONz364wTjar/eMWpeYVfrdHLUiLGxam7WMD/rMatDR9YsDcj8eut0MN1ymNXjFMQbFqQ1eZFeGriINBaUIsHxhX9ogK0oy80l/OADbxkkvLgHyKSSSdDoXeEGgSQBoaGGiAZYaINOaEtQzMGjA0CaleGrzIGhq0BjWHjFfoTGG+IwPBONgqRiPMYb9YwNEG0NGip95gFSNSp59WgWNq1Y1HmJXjFqRFjaj+v9oxalpiR/zjFaCcbg3XlDWp5TEKnX3jVfn9vmLCxtV/ONV5iDQleLA3B4xXmJanjG95JwmoGGD+ky5/GMRoGd7+0uK9TJAPk5kEkk3dCSSSQCS5UkAIQ5JIAUNJJIgsRo3CSSCRjhHD8R9JUkCHx68Y3n1xEkkQHG05JIEbQ3Q03SSQIxd3+6Gdw8hLkiKmN+s0LvHXGSSCTRIvXtKkkkZRjpJIjOkkkgH/2Q==" alt=""/>
+                <img src={discover_weekly?.images[0].url} alt=""/>
                 <div className="body__infoText">
                     <strong>PLAYLIST</strong>
                     <h2>Discover Weekly</h2>
-                    <p>description...</p>
+                    <p>{discover_weekly?.description}</p>
 
                 </div>
+            </div>
+            <div className="body__songs">
+                <div className="body__icons">
+                    <PlayCircleFilledIcon className="body__shuffle"/>
+                    <FavoriteIcon  fontSize="large"/>
+                    <MoreHorizIcon/>
+
+                </div>
+                
             </div>
             
         </div>

@@ -46,6 +46,14 @@ function App() {
           playlists:playlists,
         })
       })
+
+      spotify.getPlaylist('').then(response =>
+        dispatch({
+            type:"SET_DISCOVER_WEEKLY",
+            discover_weekly:response,
+        
+        })
+        );
     }
 
     console.log('>>>',token);
